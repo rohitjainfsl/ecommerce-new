@@ -1,10 +1,9 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
-import { ecomcontext } from "../context/EcomProvider";
+import { useEcom } from "../context/EcomProvider";
 
 function Home() {
-//   const { products, loading, fetchProducts } = useEcom();
-  const {products,loading,fetchProducts}=useContext(ecomcontext)
+  const { products, loading, fetchProducts } = useEcom();
 
   useEffect(() => {
     fetchProducts();

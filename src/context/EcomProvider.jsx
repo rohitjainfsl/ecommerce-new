@@ -1,7 +1,7 @@
 import { createContext, useContext, useState } from "react";
 import instance from "../axiosConfig";
 
- export const ecomcontext = createContext();
+const ecomcontext = createContext();
 
 function EcomProvider({ children }) {
   const [products, setProducts] = useState([]);
@@ -22,13 +22,35 @@ function EcomProvider({ children }) {
     }
   }
 
+  function addToCart(product) {
+    const productAlreadyExists = cart.find(
+      (cartItem) => cartItem._id === product._id
+    );
+
+    if (productAlreadyExists) {
+      setCart(
+        cart.map((cartItem) =>
+          cartItem._id === product._id
+            ? { ...cartItem, quantity: Number(cartItem.quantity) + 1 }
+            : cartItem
+        )
+      );
+    } else {
+      const obj = { product, quantity: 1 };
+      setCart([...cart, obj]);
+    }
+  }
+
   return (
-    <ecomcontext.Provider value={{ products, cart, loading, fetchProducts }}>
+    <ecomcontext.Provider
+      value={{ products, cart, loading, fetchProducts, addToCart }}
+    >
       {children}
     </ecomcontext.Provider>
   );
 }
-// export function useEcom() {
-//   return useContext(ecomcontext);
-// }
+
+export function useEcom() {
+  return useContext(ecomcontext);
+}
 export default EcomProvider;

@@ -2,10 +2,13 @@ import { useEffect, useState } from "react";
 import instance from "../axiosConfig";
 import { useParams } from "react-router-dom";
 import { MdOutlineCurrencyRupee } from "react-icons/md";
+import { useEcom } from "../context/EcomProvider";
 
 function SingleProduct() {
   const [loading, setLoading] = useState(false);
   const [product, setProduct] = useState({});
+  const { addToCart } = useEcom();
+
   let { id } = useParams();
 
   useEffect(() => {
@@ -28,9 +31,7 @@ function SingleProduct() {
     }
   }
 
-  function handleAddToCart (){
-    
-  }
+  function handleAddToCart() {}
 
   if (loading) return <h3>Loading...</h3>;
 
@@ -55,17 +56,30 @@ function SingleProduct() {
           <div className="price flex items-center">
             <MdOutlineCurrencyRupee /> <span>{product.price}</span>
           </div>
-             <h2>  <strong>Brand:-</strong> {product.brand}</h2>
-             <h2> <strong>Category:- </strong> {product.category} </h2>
-             <div className="flex">
-             <strong>Description:- </strong>
-               <p>{product.description}</p> 
-             </div>
+          <h2>
+            {" "}
+            <strong>Brand:-</strong> {product.brand}
+          </h2>
+          <h2>
+            {" "}
+            <strong>Category:- </strong> {product.category}{" "}
+          </h2>
+          <div className="flex">
+            <strong>Description:- </strong>
+            <p>{product.description}</p>
+          </div>
 
-        <div className=" ">
-            <button className="border-2 bg-green-300 text-white  px-3 py-1 font-bold cursor-pointer transition-all duration-300  hover:bg-rose-600 ">Add to wishlist</button>
-            <button className="border-2 bg-cyan-500 text-white  px-3 py-1 font-bold cursor-pointer transition-all duration-300  hover:bg-rose-600 " onClick={handleAddToCart}>Add to Cart</button>
-        </div>
+          <div className=" ">
+            <button className="border-2 bg-green-300 text-white  px-3 py-1 font-bold cursor-pointer transition-all duration-300  hover:bg-rose-600 ">
+              Add to wishlist
+            </button>
+            <button
+              className="border-2 bg-cyan-500 text-white  px-3 py-1 font-bold cursor-pointer transition-all duration-300  hover:bg-rose-600 "
+              onClick={() => addToCart(product)}
+            >
+              Add to Cart
+            </button>
+          </div>
         </div>
       </div>
     </>
