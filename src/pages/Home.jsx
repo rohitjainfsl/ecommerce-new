@@ -30,8 +30,7 @@ function Home() {
                       : item.name}
                   </h2>
                   <p className="text-2xl my-2">$ {item.price}</p>
-                  <button 
-                  className="capitalize bg-cyan-300 hover:bg-cyan-600 text-black hover:text-white font-bold py-2 px-12 my-2 rounded cursor-pointer transition-all duration-300">
+                  <button className="capitalize bg-cyan-300 hover:bg-cyan-600 text-black hover:text-white font-bold py-2 px-12 my-2 rounded cursor-pointer transition-all duration-300">
                     Add to wishlist
                   </button>
                 </div>

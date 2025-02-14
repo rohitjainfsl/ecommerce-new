@@ -5,7 +5,7 @@ import { IoIosCart } from "react-icons/io";
 function Header() {
   const { cart } = useEcom();
   return (
-    <header className="flex justify-between items-center px-12 py-2 mb-12 bg-amber-400 ">
+    <header className="flex justify-between items-center px-12 py-2 mb-4 bg-amber-400 ">
       <h1 className="font-bold text-2xl">
         <Link to="/">Ecommerce</Link>
       </h1>

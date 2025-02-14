@@ -13,7 +13,6 @@ function EcomProvider({ children }) {
       setLoading(true);
       const response = await instance.get("/product");
       setProducts(response.data);
-      console.log(response.data);
     } catch (error) {
       console.log(error);
       setLoading(false);
@@ -23,10 +22,6 @@ function EcomProvider({ children }) {
   }
 
   function addToCart(product) {
-    // const productAlreadyExists = cart.find(
-    //   (cartItem) => cartItem._id === product._id
-    // );
-
     if (existInCart(product._id)) {
       setCart(
         cart.map((cartItem) =>
@@ -41,17 +36,34 @@ function EcomProvider({ children }) {
     }
   }
 
-  function removeFromCart(product) {
-    setCart(cart.filter((cartItem) => cartItem.product._id !== product._id));
+  function removeFromCart(productId) {
+    setCart(cart.filter((cartItem) => cartItem.product._id !== productId));
+  }
+
+  function updateQuantity(productId, sign) {
+    if (!existInCart(productId)) {
+      console.log("Incorrect Id");
+    }
+    setCart(
+      cart.map((cartItem) =>
+        cartItem.product._id === productId
+          ? {
+              ...cartItem,
+              quantity: cartItem.quantity + (sign === "+" ? 1 : -1),
+            }
+          : cartItem
+      )
+    );
   }
 
   function existInCart(productId) {
     const productAlreadyExists = cart.find(
       (cartItem) => cartItem.product._id === productId
     );
-    console.log(productAlreadyExists);
     return productAlreadyExists ? true : false;
   }
+
+  console.log(cart);
 
   return (
     <ecomcontext.Provider
@@ -63,6 +75,7 @@ function EcomProvider({ children }) {
         addToCart,
         removeFromCart,
         existInCart,
+        updateQuantity,
       }}
     >
       {children}

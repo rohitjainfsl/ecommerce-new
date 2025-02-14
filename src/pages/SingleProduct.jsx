@@ -21,7 +21,6 @@ function SingleProduct() {
     try {
       setLoading(true);
       const response = await instance.get(`/product/${id}`);
-      console.log(response.data);
       setProduct(response.data);
     } catch (error) {
       console.log(error);
@@ -35,7 +34,7 @@ function SingleProduct() {
 
   return (
     <>
-      <div className="product flex gap-8 px-12 py-4">
+      <div className="product flex gap-8">
         <div className="left w-1/4">
           <img src={product.url} alt={product.name} />
         </div>
@@ -68,20 +67,20 @@ function SingleProduct() {
           </div>
 
           <div className=" ">
-            <button className="border-2 bg-green-300 text-white  px-3 py-1 font-bold cursor-pointer transition-all duration-300  hover:bg-rose-600 ">
+            <button className="border-2 rounded-md bg-green-400 hover:bg-green-600 text-white  px-3 py-1 font-bold cursor-pointer transition-all duration-400 ">
               Add to wishlist
             </button>
 
             {existInCart(product._id) ? (
               <button
-                className="border-2 bg-red-400 text-white  px-3 py-1 font-bold cursor-pointer transition-all duration-300  hover:bg-red-600"
-                onClick={() => removeFromCart(product)}
+                className="border-2 rounded-md bg-red-400 text-white  px-3 py-1 font-bold cursor-pointer transition-all duration-400  hover:bg-red-600"
+                onClick={() => removeFromCart(product._id)}
               >
                 Remove From Cart
               </button>
             ) : (
               <button
-                className="border-2 bg-cyan-500 text-white  px-3 py-1 font-bold cursor-pointer transition-all duration-300  hover:bg-rose-600 "
+                className="border-2 rounded-md bg-cyan-400 text-white  px-3 py-1 font-bold cursor-pointer transition-all duration-400  hover:bg-cyan-600 "
                 onClick={() => addToCart(product)}
               >
                 Add to Cart
