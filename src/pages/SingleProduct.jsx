@@ -7,7 +7,7 @@ import { useEcom } from "../context/EcomProvider";
 function SingleProduct() {
   const [loading, setLoading] = useState(false);
   const [product, setProduct] = useState({});
-  const { addToCart } = useEcom();
+  const { existInCart, addToCart, removeFromCart } = useEcom();
 
   let { id } = useParams();
 
@@ -30,8 +30,6 @@ function SingleProduct() {
       setLoading(false);
     }
   }
-
-  function handleAddToCart() {}
 
   if (loading) return <h3>Loading...</h3>;
 
@@ -73,12 +71,22 @@ function SingleProduct() {
             <button className="border-2 bg-green-300 text-white  px-3 py-1 font-bold cursor-pointer transition-all duration-300  hover:bg-rose-600 ">
               Add to wishlist
             </button>
-            <button
-              className="border-2 bg-cyan-500 text-white  px-3 py-1 font-bold cursor-pointer transition-all duration-300  hover:bg-rose-600 "
-              onClick={() => addToCart(product)}
-            >
-              Add to Cart
-            </button>
+
+            {existInCart(product._id) ? (
+              <button
+                className="border-2 bg-red-400 text-white  px-3 py-1 font-bold cursor-pointer transition-all duration-300  hover:bg-red-600"
+                onClick={() => removeFromCart(product)}
+              >
+                Remove From Cart
+              </button>
+            ) : (
+              <button
+                className="border-2 bg-cyan-500 text-white  px-3 py-1 font-bold cursor-pointer transition-all duration-300  hover:bg-rose-600 "
+                onClick={() => addToCart(product)}
+              >
+                Add to Cart
+              </button>
+            )}
           </div>
         </div>
       </div>

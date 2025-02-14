@@ -23,11 +23,11 @@ function EcomProvider({ children }) {
   }
 
   function addToCart(product) {
-    const productAlreadyExists = cart.find(
-      (cartItem) => cartItem._id === product._id
-    );
+    // const productAlreadyExists = cart.find(
+    //   (cartItem) => cartItem._id === product._id
+    // );
 
-    if (productAlreadyExists) {
+    if (existInCart(product._id)) {
       setCart(
         cart.map((cartItem) =>
           cartItem._id === product._id
@@ -41,9 +41,29 @@ function EcomProvider({ children }) {
     }
   }
 
+  function removeFromCart(product) {
+    setCart(cart.filter((cartItem) => cartItem.product._id !== product._id));
+  }
+
+  function existInCart(productId) {
+    const productAlreadyExists = cart.find(
+      (cartItem) => cartItem.product._id === productId
+    );
+    console.log(productAlreadyExists);
+    return productAlreadyExists ? true : false;
+  }
+
   return (
     <ecomcontext.Provider
-      value={{ products, cart, loading, fetchProducts, addToCart }}
+      value={{
+        products,
+        cart,
+        loading,
+        fetchProducts,
+        addToCart,
+        removeFromCart,
+        existInCart,
+      }}
     >
       {children}
     </ecomcontext.Provider>
