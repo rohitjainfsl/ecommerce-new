@@ -5,6 +5,7 @@ const ecomcontext = createContext();
 
 function EcomProvider({ children }) {
   const [products, setProducts] = useState([]);
+  const [categories, setCategories] = useState([]);
   const [cart, setCart] = useState([]);
   const [loading, setLoading] = useState(false);
 
@@ -13,6 +14,19 @@ function EcomProvider({ children }) {
       setLoading(true);
       const response = await instance.get("/product");
       setProducts(response.data);
+    } catch (error) {
+      console.log(error);
+      setLoading(false);
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  async function fetchCategories() {
+    try {
+      setLoading(true);
+      const response = await instance.get("/product/categories/all");
+      setCategories(response.data);
     } catch (error) {
       console.log(error);
       setLoading(false);
@@ -63,15 +77,15 @@ function EcomProvider({ children }) {
     return productAlreadyExists ? true : false;
   }
 
-  console.log(cart);
-
   return (
     <ecomcontext.Provider
       value={{
         products,
+        categories,
         cart,
         loading,
         fetchProducts,
+        fetchCategories,
         addToCart,
         removeFromCart,
         existInCart,
