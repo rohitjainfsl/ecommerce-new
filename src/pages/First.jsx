@@ -6,7 +6,7 @@ function First() {
   return (
     <>
       <Header />
-      <main className="px-12 py-4">
+      <main className="px-12 py-4 min-h-screen">
         <Outlet />
       </main>
       <Footer />

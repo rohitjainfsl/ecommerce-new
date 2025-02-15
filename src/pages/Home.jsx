@@ -1,6 +1,8 @@
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useEcom } from "../context/EcomProvider";
+import Loader from "../components/Loader";
+import { GiBeachBag } from "react-icons/gi";
 
 function Home() {
   const { products, loading, fetchProducts } = useEcom();
@@ -9,14 +11,14 @@ function Home() {
     fetchProducts();
   }, []);
 
-  if (loading) return <h3>Loading...</h3>;
+  if (loading) return <Loader />;
   return (
     <>
-      <div className="flex flex-wrap justify-center gap-16">
+      <div className="flex flex-wrap justify-evenly items-center gap-12">
         {products.length > 0
           ? products.map((item) => {
               return (
-                <div className=" text-center" key={item._id}>
+                <div className="w-[21%] text-center" key={item._id}>
                   <Link to={`/product/${item._id}`}>
                     <img
                       className="w-[15rem] h-[15rem] object-contain"
@@ -30,8 +32,8 @@ function Home() {
                       : item.name}
                   </h2>
                   <p className="text-2xl my-2">$ {item.price}</p>
-                  <button className="capitalize bg-cyan-300 hover:bg-cyan-600 text-black hover:text-white font-bold py-2 px-12 my-2 rounded cursor-pointer transition-all duration-300">
-                    Add to wishlist
+                  <button className="capitalize bg-cyan-300 hover:bg-cyan-600 text-black hover:text-white font-bold py-2 px-6 my-2 rounded cursor-pointer transition-all duration-300 inline-flex gap-4 items-center">
+                    wishlist <GiBeachBag className="inline-block" />
                   </button>
                 </div>
               );

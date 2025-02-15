@@ -3,6 +3,7 @@ import instance from "../axiosConfig";
 import { useParams } from "react-router-dom";
 import { MdOutlineCurrencyRupee } from "react-icons/md";
 import { useEcom } from "../context/EcomProvider";
+import Loader from "../components/Loader";
 
 function SingleProduct() {
   const [loading, setLoading] = useState(false);
@@ -30,7 +31,7 @@ function SingleProduct() {
     }
   }
 
-  if (loading) return <h3>Loading...</h3>;
+  if (loading) return <Loader />;
 
   return (
     <>
