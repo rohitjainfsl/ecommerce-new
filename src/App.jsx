@@ -5,9 +5,8 @@ import Cart from "./pages/Cart";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 import SingleProduct from "./pages/SingleProduct";
-import { useContext } from "react";
+import SingleCategory from "./pages/SingleCategory";
 import EcomProvider from "./context/EcomProvider";
-
 
 const router = createBrowserRouter([
   {
@@ -34,15 +33,15 @@ const router = createBrowserRouter([
         path: "/product/:id",
         element: <SingleProduct />,
       },
+      {
+        path: "/category/:id",
+        element: <SingleCategory />,
+      },
     ],
   },
 ]);
 
-
-
 function App() {
- 
-
   return (
     <EcomProvider>
       <RouterProvider router={router} />

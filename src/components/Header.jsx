@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 
 function Header() {
   const [dropdownOpen, setDropdownOpen] = useState(false);
-  const { cart, categories, fetchCategories, loading } = useEcom();
+  const { cart, categories, fetchCategories, filterByCategory } = useEcom();
 
   useEffect(() => {
     fetchCategories();
@@ -60,12 +60,12 @@ function Header() {
                   categories.map((category, index) => {
                     return (
                       <li key={index}>
-                        <Link
-                          to=""
-                          className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                        <a
+                          href={`/category/${category.category.toLowerCase()}`}
+                          className="block w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white text-left"
                         >
                           {category.category}
-                        </Link>
+                        </a>
                       </li>
                     );
                   })}
