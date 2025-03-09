@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { useEcom } from "../Context/EcomProvider";
 import { FaCartShopping } from "react-icons/fa6";
 import { FaHeart } from "react-icons/fa";
@@ -17,13 +17,13 @@ function Header() {
   }, []);
 
   return (
-    <div className="flex justify-between bg-amber-200 px-12 py-2">
-      <Link to="/">
+    <header className="flex justify-between bg-amber-200 px-12 py-2">
+      <NavLink to="/">
         <div className="font-bold text-xl">Ecommerce</div>
-      </Link>
+      </NavLink>
       <ul className="flex gap-4">
         <li>
-          <Link to="/hotDeals">Hot Deals</Link>
+          <NavLink to="/hotDeals">Hot Deals</NavLink>
         </li>
 
         <li>
@@ -67,13 +67,13 @@ function Header() {
                 categories.map((category, index) => {
                   return (
                     <li key={index}>
-                      <Link
+                      <NavLink
                         to={`/category/${category.name.toLowerCase()}`}
                         onClick={() => setDropdownOpen((prev) => !prev)}
                         className="block w-full px-4 py-2 hover:bg-gray-500 dark:hover:bg-gray-600 dark:hover:text-white text-left"
                       >
                         {category.name}
-                      </Link>
+                      </NavLink>
                     </li>
                   );
                 })}
@@ -82,27 +82,30 @@ function Header() {
         </li>
         <li>
           {isUserLoggedIn || isAdminLoggedIn ? (
-            <Link onClick={logout} to="/user/login">
+            <Link
+              onClick={logout}
+              to={isUserLoggedIn ? `/user/login` : `/admin/login`}
+            >
               Logout
             </Link>
           ) : (
-            <Link to="/user/login">Login</Link>
+            <NavLink to="/user/login">Login</NavLink>
           )}
         </li>
 
         <li>
-          <Link to="/wishlist">
+          <NavLink to="/wishlist">
             <p className="flex items-center">
               Wishlist{" "}
               <span className="px-1">
                 <FaHeart />
               </span>
             </p>
-          </Link>
+          </NavLink>
         </li>
 
         <li>
-          <Link to="/cart">
+          <NavLink to="/cart">
             <p className="flex relative">
               Cart
               <span className="absolute right-[-14px] top-[-9px] rounded-full bg-red-600 text-white px-[5px] mt-1 text-xs">
@@ -110,10 +113,10 @@ function Header() {
               </span>
               <FaCartShopping className="text-lg mt-1" />
             </p>
-          </Link>
+          </NavLink>
         </li>
       </ul>
-    </div>
+    </header>
   );
 }
 

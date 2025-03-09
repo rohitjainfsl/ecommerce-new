@@ -31,7 +31,7 @@ function AdminLogin() {
         response.status === 200 &&
         response.data.message === "Login Successfull"
       ) {
-        navigate("/admin/addProduct");
+        navigate("/admin/home");
       }
     } catch (error) {
       setError(error.message);
@@ -52,6 +52,7 @@ function AdminLogin() {
               value={data.name}
               onChange={handleChange}
               className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
+              autoFocus
             />
             <input
               type="password"

@@ -18,6 +18,6 @@ adminRouter.post("/logout", async (req, res) => {
   }
 });
 adminRouter.get("/check", checkAdmin, (req, res) => {
-  res.send({ message: "admin authenticated", admin });
+  res.send({ message: "admin authenticated", admin: req.admin });
 });
 export default adminRouter;

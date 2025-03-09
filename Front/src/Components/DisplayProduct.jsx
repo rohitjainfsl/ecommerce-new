@@ -2,10 +2,9 @@
 import { Link } from "react-router-dom";
 import { MdOutlineCurrencyRupee } from "react-icons/md";
 
-// It is receiving the {product} array as a prop from where it is being passed (ie Home component & ShopByCategory component)
 function DisplayProduct({ product }) {
   return (
-    <div className="flex flex-wrap justify-center gap-16">
+    <div className="flex flex-wrap justify-center gap-16 pt-8 pb-10">
       {product.length > 0
         ? product.map((item) => {
             // console.log(product)

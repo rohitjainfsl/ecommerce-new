@@ -34,4 +34,3 @@ export async function checkAdmin(req, res, next) {
   req.admin = admin;
   next();
 }
-

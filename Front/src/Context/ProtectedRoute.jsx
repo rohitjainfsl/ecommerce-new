@@ -14,10 +14,12 @@ function ProtectedRoute({ children }) {
   async function fetchAllowedStatus() {
     try {
       setLoading(true);
-      if (children.props.destination.startsWith("user/"))
-        await instance.get("/auth/check", { withCredentials: true });
-      else await instance.get("/admin/check", { withCredentials: true });
+      const route = children.props.fallback.startsWith("user/")
+        ? "auth"
+        : "admin";
+      await instance.get(route + "/check", { withCredentials: true });
       setAllowed(true);
+      
     } catch (error) {
       console.log(error);
       setLoading(false);
@@ -27,11 +29,11 @@ function ProtectedRoute({ children }) {
     }
   }
   if (loading) return <div>LOADING...</div>;
-  console.log("allowed", allowed);
+
   return allowed ? (
     children
   ) : (
-    <Navigate to={"/" + children.props.destination} replace />
+    <Navigate to={"/" + children.props.fallback} replace />
   );
 }
 
