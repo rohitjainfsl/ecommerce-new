@@ -11,6 +11,7 @@ function AdminLogin() {
     email: "",
     password: "",
   });
+  const [error, setError] = useState("");
 
   function handleChange(e) {
     const { name, value } = e.target;
@@ -33,29 +34,42 @@ function AdminLogin() {
         navigate("/admin/addProduct");
       }
     } catch (error) {
-      console.log(error);
+      setError(error.message);
     }
   }
 
   return (
     <>
-      <form action="" onSubmit={handleSubmit}>
-        <input
-          type="email"
-          placeholder="Enter Email"
-          name="email"
-          value={data.name}
-          onChange={handleChange}
-        />
-        <input
-          type="password"
-          placeholder="Enter Password"
-          name="password"
-          value={data.password}
-          onChange={handleChange}
-        />
-        <button type="submit">Login</button>
-      </form>
+      <div className="min-h-screen bg-gray-100 flex items-center justify-center">
+        <div className="max-w-md w-full space-y-8 p-8 bg-white rounded-lg shadow">
+          <h2 className="text-3xl font-bold text-center">Login</h2>
+          {error && <p className="text-red-500 text-center">{error}</p>}
+          <form action="" onSubmit={handleSubmit} className="space-y-6">
+            <input
+              type="email"
+              placeholder="Enter Email"
+              name="email"
+              value={data.name}
+              onChange={handleChange}
+              className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
+            />
+            <input
+              type="password"
+              placeholder="Enter Password"
+              name="password"
+              value={data.password}
+              onChange={handleChange}
+              className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
+            />
+            <button
+              type="submit"
+              className="w-full py-2 px-4 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
+            >
+              Login
+            </button>
+          </form>
+        </div>
+      </div>
     </>
   );
 }

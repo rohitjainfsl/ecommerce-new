@@ -8,6 +8,8 @@ const AuthContext = createContext(null);
 function AuthProvider({ children }) {
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
   const [isAdminLoggedIn, setIsAdminLoggedIn] = useState(false);
+  const [loggedInUser, setLoggedInUser] = useState({});
+  const [loggedInAdmin, setLoggedInAdmin] = useState({});
 
   useEffect(() => {
     checkAuth();
@@ -19,22 +21,30 @@ function AuthProvider({ children }) {
       const response = await instance.get("/auth/check", {
         withCredentials: true,
       });
-      if (response.status === 200) setIsUserLoggedIn(true);
+      if (response.status === 200) {
+        setIsUserLoggedIn(true);
+        setLoggedInUser(response.user);
+      }
     } catch (error) {
       console.log(error);
       setIsUserLoggedIn(false);
+      setLoggedInUser({});
     }
   }
 
   async function checkAuthAdmin() {
     try {
-      await instance.get("/admin/check", {
+      const response = await instance.get("/admin/check", {
         withCredentials: true,
       });
-      setIsAdminLoggedIn(true);
+      if (response.status === 200) {
+        setIsAdminLoggedIn(true);
+        setLoggedInAdmin(response.admin);
+      }
     } catch (error) {
       console.log(error);
       setIsAdminLoggedIn(false);
+      setLoggedInAdmin({});
     }
   }
 

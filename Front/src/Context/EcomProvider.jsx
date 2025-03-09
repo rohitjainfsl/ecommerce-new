@@ -104,6 +104,7 @@ function EcomProvider({ children }) {
 
   // addToCart function
   function addToCart(product) {
+    
     if (existInCart(product._id)) {
       // If the product is already in the cart, updates it quantity.
       setCart(

@@ -5,16 +5,15 @@ import Wishlist from "./pages/Wishlist";
 import Cart from "./pages/Cart";
 import ShopByCategory from "./pages/ShopByCategory";
 import SingleProduct from "./pages/SingleProduct";
-import EcomProvider from "./context/EcomProvider";
-import AddProduct from "./admin/AddProduct";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
-import AuthProvider from "./Context/AuthProvider";
-import AddCategory from "./admin/AddCategory";
 import HotDeals from "./Components/HotDeals";
-
-import AdminLogin from "./admin/AdminLogin";
+import EcomProvider from "./context/EcomProvider";
+import AuthProvider from "./Context/AuthProvider";
 import ProtectedRoute from "./Context/ProtectedRoute";
+import AddCategory from "./admin/AddCategory";
+import AddProduct from "./admin/AddProduct";
+import AdminLogin from "./admin/AdminLogin";
 
 // component is a function that renders UI element.
 
@@ -62,6 +61,10 @@ const router = createBrowserRouter([
       {
         path: "/user/login",
         element: <Login />,
+      },
+      {
+        path: "/admin",
+        element: <AdminLogin />,
       },
       {
         path: "/admin/login",

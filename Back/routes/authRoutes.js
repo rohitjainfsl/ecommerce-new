@@ -4,7 +4,7 @@ import { check } from "../middlewares/auth.js";
 const authRouter = express.Router();
 
 authRouter.get("/check", check, (req, res) => {
-  res.send({ message: "User Authenticated" });
+  res.send({ message: "User Authenticated", user });
 });
 
 authRouter.post("/logout", async (req, res) => {
