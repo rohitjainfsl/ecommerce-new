@@ -2,14 +2,16 @@ import { Link } from "react-router-dom";
 import { useEcom } from "../Context/EcomProvider";
 import { useEffect, useState } from "react";
 
-function AdminProducts() {
-  const { product, fetchProduct } = useEcom();
+function AdminCategories() {
+  const { categories, fetchCategories } = useEcom();
   const [page, setPage] = useState(1);
 
   useEffect(() => {
-    if (page > 1) fetchProduct(page);
-    else fetchProduct();
+    if (page > 1) fetchCategories(page);
+    else fetchCategories();
   }, [page]);
+
+  console.log("categories", categories);
 
   return (
     <div className="min-h-screen flex items-stretch">
@@ -44,19 +46,16 @@ function AdminProducts() {
         </ul>
       </aside>
       <main className="w-4/5 p-4">
-        <h2 className="text-2xl font-bold mb-3">Products</h2>
+        <h2 className="text-2xl font-bold mb-3">Categories</h2>
         <table className="w-full">
           <thead>
             <tr className="text-left">
-              <th className="p-2">Product</th>
-              <th className="p-2">Original Price</th>
-              <th className="p-2">Discounted Price</th>
-              <th className="p-2">Category</th>
+              <th className="p-2">Name</th>
               <th className="p-2">Action</th>
             </tr>
           </thead>
           <tbody>
-            {product?.products?.map((item, index) => {
+            {categories?.category?.map((item, index) => {
               return (
                 <tr
                   key={item._id}
@@ -70,11 +69,8 @@ function AdminProducts() {
                       className="w-20 h-20 object-contain"
                       alt=""
                     />
-                    <p>{item.title}</p>
+                    <p>{item.name}</p>
                   </td>
-                  <td className="p-2">{item.OriginalPrice}</td>
-                  <td className="p-2">{item.discountedPrice}</td>
-                  <td className="p-2">{item.category.name}</td>
                   <td className="p-2">
                     <button className="bg-red-500 text-white p-1 rounded">
                       Delete
@@ -87,17 +83,17 @@ function AdminProducts() {
         </table>
 
         <div className="pagination my-3">
-          {product.currentPage > 1 && (
+          {categories.currentPage > 1 && (
             <Link
-              to={`?page=${product.currentPage - 1}`}
+              to={`?page=${categories.currentPage - 1}`}
               className="bg-blue-500 text-white p-1 rounded mx-2 px-2 cursor-pointer"
-              onClick={() => setPage(product.currentPage - 1)}
+              onClick={() => setPage(categories.currentPage - 1)}
             >
               Previous
             </Link>
           )}
 
-          {Array.from({ length: product.totalPages }).map((_, index) => {
+          {Array.from({ length: categories.totalPages }).map((_, index) => {
             return (
               <Link
                 key={index}
@@ -110,11 +106,11 @@ function AdminProducts() {
             );
           })}
 
-          {product.currentPage < product.totalPages && (
+          {categories.currentPage < categories.totalPages && (
             <Link
-              to={`?page=${product.currentPage + 1}`}
+              to={`?page=${categories.currentPage + 1}`}
               className="bg-blue-500 text-white p-1 rounded mx-2 px-2 cursor-pointer"
-              onClick={() => setPage(product.currentPage + 1)}
+              onClick={() => setPage(categories.currentPage + 1)}
             >
               Next
             </Link>
@@ -125,4 +121,4 @@ function AdminProducts() {
   );
 }
 
-export default AdminProducts;
+export default AdminCategories;

@@ -23,13 +23,15 @@ function EcomProvider({ children }) {
   const [dealProduct, setDealProduct] = useState([]);
 
   // fetching all Products
-  async function fetchProduct() {
+  async function fetchProduct(page = null) {
     try {
       setLoading(true);
-      // const response = await axios.get(`https://ecommerce-api-8ga2.onrender.com/api/product`);
-      const response = await instance.get(`/product/get`, {
-        withCredentials: true,
-      });
+      const response = await instance.get(
+        page ? `product/get/?page=${page}` : `product/get`,
+        {
+          withCredentials: true,
+        }
+      );
       setProduct(response.data);
     } catch (error) {
       console.log(error);
@@ -104,7 +106,6 @@ function EcomProvider({ children }) {
 
   // addToCart function
   function addToCart(product) {
-    
     if (existInCart(product._id)) {
       // If the product is already in the cart, updates it quantity.
       setCart(

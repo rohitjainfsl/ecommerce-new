@@ -3,20 +3,33 @@ import { Link } from "react-router-dom";
 function AdminHome() {
   return (
     <div className="min-h-screen flex">
-      <aside className="w-1/5 p-4 bg-gray-200 rounded h-screen">
+      <aside className="w-1/5 p-4 bg-gray-200 min-h-fit">
         <h1 className="text-2xl font-bold">Admin Panel</h1>
-        <ul className="mt-4">
-          <li className="py-2">
-            <Link to="/admin/home">Dashboard</Link>
+        <ul className="mt-4 sticky top-0">
+          <li>
+            <Link to="/admin/home" className="py-3 w-full inline-block">
+              Dashboard
+            </Link>
           </li>
-          <li className="py-2">
-            <Link to="">Products</Link>
+          <li>
+            <Link to="/admin/categories" className="py-3 w-full inline-block">
+              Categories
+            </Link>
           </li>
-          <li className="py-2">
-            <Link to="">Orders</Link>
+          <li>
+            <Link to="/admin/products" className="py-3 w-full inline-block">
+              Products
+            </Link>
           </li>
-          <li className="py-2">
-            <Link to="">Users</Link>
+          <li>
+            <Link to="" className="py-3 w-full inline-block">
+              Orders
+            </Link>
+          </li>
+          <li>
+            <Link to="" className="py-3 w-full inline-block">
+              Users
+            </Link>
           </li>
         </ul>
       </aside>
