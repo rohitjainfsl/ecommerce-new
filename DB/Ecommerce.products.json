@@ -1,0 +1,420 @@
+[{
+  "_id": {
+    "$oid": "67c062fb2d5f1a323c94fbfb"
+  },
+  "title": "Shirt",
+  "brand": "Burberry",
+  "category": {
+    "$oid": "67c04dd5cec051d2cee2c992"
+  },
+  "discountedPrice": 3999,
+  "image": "https://res.cloudinary.com/dahps9yhv/image/upload/v1740661498/ecommerce/pfs81aohmgh6g2xvyi4v.jpg",
+  "__v": 0,
+  "OriginalPrice": 5999,
+  "description": "A Burberry shirt is a luxury fashion staple known for its premium fabrics, timeless designs, and signature check pattern. It blends classic British style with modern elegance, offering both casual and formal options."
+},
+{
+  "_id": {
+    "$oid": "67c063492d5f1a323c94fc02"
+  },
+  "title": "Earphone",
+  "brand": "Boat",
+  "category": {
+    "$oid": "67c02ec11d0e8158df62b8b7"
+  },
+  "discountedPrice": 1299,
+  "image": "https://res.cloudinary.com/dahps9yhv/image/upload/v1740661576/ecommerce/gxwgcycd3ijhwdnoq37k.jpg",
+  "__v": 0,
+  "OriginalPrice": 1499,
+  "description": "Boat earphones offer stylish, affordable, and high-quality audio with deep bass and clear sound. They feature ergonomic designs, long battery life, and seamless Bluetooth connectivity for a great music experience."
+},
+{
+  "_id": {
+    "$oid": "67c096ac2d5f1a323c94fc1b"
+  },
+  "title": "Vegetable Chopper",
+  "brand": "Wonderchef",
+  "category": {
+    "$oid": "67c063df2d5f1a323c94fc0b"
+  },
+  "discountedPrice": 199,
+  "image": "https://res.cloudinary.com/dahps9yhv/image/upload/v1740674732/ecommerce/kkpocn87g98ppntjeljp.jpg",
+  "__v": 0,
+  "OriginalPrice": 299,
+  "description": "Vegetable Chopper that cuts your vegeatables without any effort."
+},
+{
+  "_id": {
+    "$oid": "67c1430de4453a8ac9ddd041"
+  },
+  "title": "Laptop",
+  "brand": "HP",
+  "category": {
+    "$oid": "67c02ec11d0e8158df62b8b7"
+  },
+  "discountedPrice": 25000,
+  "image": "https://res.cloudinary.com/dahps9yhv/image/upload/v1740718860/ecommerce/rbbre0lyubx6fzvfaech.jpg",
+  "__v": 0,
+  "OriginalPrice": 35000,
+  "description": "HP Laptop comes with cutting edge technologies and fast processing."
+},
+{
+  "_id": {
+    "$oid": "67c143d9e4453a8ac9ddd048"
+  },
+  "title": "Iphone",
+  "brand": "Apple",
+  "category": {
+    "$oid": "67c02ec11d0e8158df62b8b7"
+  },
+  "discountedPrice": 72000,
+  "image": "https://res.cloudinary.com/dahps9yhv/image/upload/v1740719064/ecommerce/jdadfmkzviox85dshfln.jpg",
+  "__v": 0,
+  "OriginalPrice": 80000,
+  "description": "Apple Iphone comes with a class and elegant design."
+},
+{
+  "_id": {
+    "$oid": "67c14721e4453a8ac9ddd059"
+  },
+  "title": "AC",
+  "brand": "Panasonic",
+  "category": {
+    "$oid": "67c02ec11d0e8158df62b8b7"
+  },
+  "discountedPrice": 32000,
+  "image": "https://res.cloudinary.com/dahps9yhv/image/upload/v1740719904/ecommerce/iepn91e1gsyfto0fworg.jpg",
+  "__v": 0,
+  "OriginalPrice": 35000,
+  "description": "Panasonic AC that cools your heat."
+},
+{
+  "_id": {
+    "$oid": "67c147ffe4453a8ac9ddd05c"
+  },
+  "title": "Fan",
+  "brand": "Crompton",
+  "category": {
+    "$oid": "67c02ec11d0e8158df62b8b7"
+  },
+  "discountedPrice": 2000,
+  "image": "https://res.cloudinary.com/dahps9yhv/image/upload/v1740720126/ecommerce/gvpl7ujb9emax6w4mxpi.jpg",
+  "__v": 0,
+  "OriginalPrice": 5000,
+  "description": "Crompton fan that cools your dream."
+},
+{
+  "_id": {
+    "$oid": "67c148f9e4453a8ac9ddd05f"
+  },
+  "title": "Tablet",
+  "brand": "Honor",
+  "category": {
+    "$oid": "67c02ec11d0e8158df62b8b7"
+  },
+  "discountedPrice": 21000,
+  "image": "https://res.cloudinary.com/dahps9yhv/image/upload/v1740720376/ecommerce/vejo56vyvmkfbqlhsx8l.jpg",
+  "__v": 0,
+  "OriginalPrice": 25000,
+  "description": "Honor tablet that captures world in your hands."
+},
+{
+  "_id": {
+    "$oid": "67c149b5e4453a8ac9ddd068"
+  },
+  "title": "Shoes",
+  "brand": "Adidas",
+  "category": {
+    "$oid": "67c14975e4453a8ac9ddd063"
+  },
+  "discountedPrice": 2000,
+  "image": "https://res.cloudinary.com/dahps9yhv/image/upload/v1740720564/ecommerce/sax0lhye1wxpkccz1zhk.jpg",
+  "__v": 0,
+  "OriginalPrice": 6000,
+  "description": "Adidas Shoes comes with lightning fast grip."
+},
+{
+  "_id": {
+    "$oid": "67c14b11e4453a8ac9ddd06f"
+  },
+  "title": "Heels",
+  "brand": "Gucci",
+  "category": {
+    "$oid": "67c14975e4453a8ac9ddd063"
+  },
+  "discountedPrice": 5500,
+  "image": "https://res.cloudinary.com/dahps9yhv/image/upload/v1740720912/ecommerce/rfpzzg1tatfsxiatxsaf.jpg",
+  "__v": 0,
+  "OriginalPrice": 6000,
+  "description": "Gucci heals comes with design and luxury."
+},
+{
+  "_id": {
+    "$oid": "67c14c19e4453a8ac9ddd078"
+  },
+  "title": "Mobile",
+  "brand": "Samsung",
+  "category": {
+    "$oid": "67c02ec11d0e8158df62b8b7"
+  },
+  "discountedPrice": 25000,
+  "image": "https://res.cloudinary.com/dahps9yhv/image/upload/v1740721176/ecommerce/ouuicpveadyurluhpyip.jpg",
+  "__v": 0,
+  "OriginalPrice": 60000,
+  "description": "Samsung mobiles comes with cutting edge technology."
+},
+{
+  "_id": {
+    "$oid": "67c14e52e4453a8ac9ddd088"
+  },
+  "title": "Mobile",
+  "brand": "Oppo",
+  "category": {
+    "$oid": "67c02ec11d0e8158df62b8b7"
+  },
+  "discountedPrice": 18000,
+  "image": "https://res.cloudinary.com/dahps9yhv/image/upload/v1740721746/ecommerce/yjhcxxz5abfgnxxtjaas.jpg",
+  "__v": 0,
+  "OriginalPrice": 20000,
+  "description": "Oppo mobile comes with sleek design and experience that you have never imagined."
+},
+{
+  "_id": {
+    "$oid": "67c690e0431732b4a31e595b"
+  },
+  "title": "Chocolate",
+  "brand": "FererroRocher",
+  "category": {
+    "$oid": "67c57b237ae8844a4676ad5d"
+  },
+  "OriginalPrice": 1200,
+  "discountedPrice": 1100,
+  "image": "https://res.cloudinary.com/dahps9yhv/image/upload/v1741066463/ecommerce/elbtmwm2mgmtysa4nakx.jpg",
+  "description": "Sweet Chocolate",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67c6a9f0d29273dd4801282a"
+  },
+  "title": "Namkeen",
+  "brand": "Bikaji",
+  "category": {
+    "$oid": "67c57b237ae8844a4676ad5d"
+  },
+  "OriginalPrice": 120,
+  "discountedPrice": 110,
+  "image": "https://res.cloudinary.com/dahps9yhv/image/upload/v1741072879/ecommerce/ytpxegaeogn6ja5pokv8.jpg",
+  "description": "Savour the taste of the bikaji",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67c6aa1dd29273dd4801282c"
+  },
+  "title": "Aloo Bhujia",
+  "brand": "Bikaji",
+  "category": {
+    "$oid": "67c57b237ae8844a4676ad5d"
+  },
+  "OriginalPrice": 200,
+  "discountedPrice": 120,
+  "image": "https://res.cloudinary.com/dahps9yhv/image/upload/v1741072925/ecommerce/euu4xcyg3c2smggms5cs.jpg",
+  "description": "Savour the taste of the bikaji",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67c6aa65d29273dd48012838"
+  },
+  "title": "Rasgulla",
+  "brand": "Gits",
+  "category": {
+    "$oid": "67c57b237ae8844a4676ad5d"
+  },
+  "OriginalPrice": 250,
+  "discountedPrice": 150,
+  "image": "https://res.cloudinary.com/dahps9yhv/image/upload/v1741072997/ecommerce/w1zry3budzg53bjattk5.jpg",
+  "description": "Savour the taste of juicy rasgulla",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67c6aad7d29273dd48012842"
+  },
+  "title": "Masala Box",
+  "brand": "Milton",
+  "category": {
+    "$oid": "67c063df2d5f1a323c94fc0b"
+  },
+  "OriginalPrice": 500,
+  "discountedPrice": 250,
+  "image": "https://res.cloudinary.com/dahps9yhv/image/upload/v1741073111/ecommerce/fzkmbawmvowra2peiwcq.jpg",
+  "description": "Milton Masala box will keep your masala's safe from pest and comes with air tight feature.",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67c6ab17d29273dd48012848"
+  },
+  "title": "Wiper",
+  "brand": "Victus",
+  "category": {
+    "$oid": "67c063df2d5f1a323c94fc0b"
+  },
+  "OriginalPrice": 300,
+  "discountedPrice": 200,
+  "image": "https://res.cloudinary.com/dahps9yhv/image/upload/v1741073175/ecommerce/p3pzxv5qukjiwrck74xk.jpg",
+  "description": "Wiper that cleans your home everyday",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67c6ab4cd29273dd4801284a"
+  },
+  "title": "Storage Box",
+  "brand": "victoria",
+  "category": {
+    "$oid": "67c063df2d5f1a323c94fc0b"
+  },
+  "OriginalPrice": 500,
+  "discountedPrice": 240,
+  "image": "https://res.cloudinary.com/dahps9yhv/image/upload/v1741073228/ecommerce/ks3rippuuss7nhh8owoi.jpg",
+  "description": "Box that keeps your accessories safe",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67c6ab97d29273dd4801284c"
+  },
+  "title": "Dining Table",
+  "brand": "Ackon",
+  "category": {
+    "$oid": "67c063df2d5f1a323c94fc0b"
+  },
+  "OriginalPrice": 20000,
+  "discountedPrice": 15000,
+  "image": "https://res.cloudinary.com/dahps9yhv/image/upload/v1741073302/ecommerce/q4j66ervrkulw5d6avqy.jpg",
+  "description": "Dining table where most the decision take place while eating.",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67c70604be70ac5bf43833bf"
+  },
+  "title": "Jeans",
+  "brand": "Levis",
+  "category": {
+    "$oid": "67c04dd5cec051d2cee2c992"
+  },
+  "OriginalPrice": 5000,
+  "discountedPrice": 2250,
+  "image": "https://res.cloudinary.com/dahps9yhv/image/upload/v1741096451/ecommerce/ent2pufqkfcnjx0wxj8t.jpg",
+  "description": "Levis Jeans that never fade and remains like purchased yesterday",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67c707dcbe70ac5bf43833c1"
+  },
+  "title": "Jacket",
+  "brand": "Calvin Klien",
+  "category": {
+    "$oid": "67c04dd5cec051d2cee2c992"
+  },
+  "OriginalPrice": 6000,
+  "discountedPrice": 4500,
+  "image": "https://res.cloudinary.com/dahps9yhv/image/upload/v1741096923/ecommerce/chsozyvatt3sm6uyd9k9.jpg",
+  "description": "CK which defines luxury and elegance",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67c7083dbe70ac5bf43833c7"
+  },
+  "title": "Jacket",
+  "brand": "H&M",
+  "category": {
+    "$oid": "67c04dd5cec051d2cee2c992"
+  },
+  "OriginalPrice": 2500,
+  "discountedPrice": 2250,
+  "image": "https://res.cloudinary.com/dahps9yhv/image/upload/v1741097021/ecommerce/pk0llgawcuplheiodrid.jpg",
+  "description": "H&M jacket that provides comfort and luxury",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67c7087fbe70ac5bf43833c9"
+  },
+  "title": "Top",
+  "brand": "Tommy Hilfiger",
+  "category": {
+    "$oid": "67c04dd5cec051d2cee2c992"
+  },
+  "OriginalPrice": 4500,
+  "discountedPrice": 3250,
+  "image": "https://res.cloudinary.com/dahps9yhv/image/upload/v1741097086/ecommerce/ovchuyf0emwoihvojlae.jpg",
+  "description": "Tommy Hilfiger that defines luxury and coolness",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67c70978be70ac5bf438340c"
+  },
+  "title": "Mens Tshirt",
+  "brand": "Pepe",
+  "category": {
+    "$oid": "67c04dd5cec051d2cee2c992"
+  },
+  "OriginalPrice": 1000,
+  "discountedPrice": 899,
+  "image": "https://res.cloudinary.com/dahps9yhv/image/upload/v1741097335/ecommerce/omyaj4vtyazomxsd0pd4.jpg",
+  "description": "Pepe Tshirt that provides comfort and coolness to you",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67c709a0be70ac5bf438340e"
+  },
+  "title": "Mens jeans",
+  "brand": "Spykar",
+  "category": {
+    "$oid": "67c04dd5cec051d2cee2c992"
+  },
+  "OriginalPrice": 4500,
+  "discountedPrice": 2350,
+  "image": "https://res.cloudinary.com/dahps9yhv/image/upload/v1741097375/ecommerce/wjfuve9rwawu0p1xx9ms.jpg",
+  "description": "Spykar jeans that provides you comfort and coolness",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67c709cdbe70ac5bf4383410"
+  },
+  "title": "Womens Top",
+  "brand": "Biba",
+  "category": {
+    "$oid": "67c04dd5cec051d2cee2c992"
+  },
+  "OriginalPrice": 2500,
+  "discountedPrice": 1250,
+  "image": "https://res.cloudinary.com/dahps9yhv/image/upload/v1741097420/ecommerce/koy6ns94ouro841xov9i.jpg",
+  "description": "Biba Top which provides you comfort and look blushing",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67c72e9fbe70ac5bf438343f"
+  },
+  "title": "Jeans",
+  "brand": "Pepe",
+  "category": {
+    "$oid": "67c04dd5cec051d2cee2c992"
+  },
+  "OriginalPrice": 3000,
+  "discountedPrice": 2000,
+  "image": "https://res.cloudinary.com/dahps9yhv/image/upload/v1741106846/ecommerce/dhdhvvsa58sqv1ih2bpm.jpg",
+  "description": "Pepe jeans that keeps your comfort before looks.",
+  "__v": 0
+}]

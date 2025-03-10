@@ -15,6 +15,7 @@ import AddCategory from "./admin/AddCategory";
 import AddProduct from "./admin/AddProduct";
 import AdminLogin from "./admin/AdminLogin";
 import AdminHome from "./admin/AdminHome";
+import AdminProducts from "./admin/AdminProducts";
 
 const router = createBrowserRouter([
   {
@@ -86,6 +87,14 @@ const router = createBrowserRouter([
         element: (
           <ProtectedRoute>
             <AddCategory fallback="admin/login" />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/admin/products",
+        element: (
+          <ProtectedRoute>
+            <AdminProducts fallback="admin/login" />
           </ProtectedRoute>
         ),
       },
