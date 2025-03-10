@@ -1,9 +1,0 @@
-[{
-  "_id": {
-    "$oid": "67c54806443bf7e523f364d3"
-  },
-  "name": "Shikhar Khandelwal",
-  "email": "shikhar.khandelwal27@gmail.com",
-  "role": "admin",
-  "password": "$2b$10$hg.A5e.5rnNA6GI9Ld1Ra.ahuhZT.mbgxGk6b6kue/KE5/pKGPyIa"
-}]
