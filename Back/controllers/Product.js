@@ -10,8 +10,6 @@ export async function addProduct(req, res) {
     if (!file) return res.status(404).send({ message: "File Not Found" });
     const secure_url = await uploadToCloudinary(req);
 
-    // console.log("Secure URL:", secure_url);
-
     const newProduct = new Product({ ...req.body, image: secure_url });
     await newProduct.save();
     res.status(201).send("Product Added");
@@ -46,7 +44,6 @@ export async function fetchProduct(req, res) {
       });
       query.category = categoryId;
     }
-    console.log(query.category);
     const products = await Product.find(query);
 
     res.send(products);

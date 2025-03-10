@@ -7,7 +7,12 @@ export async function registerUser(req, res) {
     const { name, email, password } = req.body;
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    const newUser = new User({ name, email, password: hashedPassword, role:'user' });
+    const newUser = new User({
+      name,
+      email,
+      password: hashedPassword,
+      role: "user",
+    });
     await newUser.save();
 
     res.status(201).send({ message: "User registered", user: newUser });
@@ -37,8 +42,6 @@ export async function loginUser(req, res) {
       }
     );
 
-    console.log("LoginToken", loginToken);
-
     res
       .cookie("LoginToken", loginToken, {
         httpOnly: false,
@@ -53,5 +56,3 @@ export async function loginUser(req, res) {
       .send({ message: "Admin not login", errorString: error.message });
   }
 }
-
-

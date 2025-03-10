@@ -10,8 +10,6 @@ import dealRouter from "./routes/dealRoutes.js";
 import adminRouter from "./routes/adminRoutes.js";
 import cartRouter from "./routes/cartRoutes.js";
 
-// CORS is a browser feature that does not allow  different origins to share data among each other.
-
 const port = process.env.PORT;
 const app = express();
 app.use(express.json());
