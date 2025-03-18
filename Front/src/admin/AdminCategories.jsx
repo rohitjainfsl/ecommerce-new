@@ -3,7 +3,7 @@ import { useEcom } from "../Context/EcomProvider";
 import { useEffect, useState } from "react";
 
 function AdminCategories() {
-  const { categories, fetchCategories } = useEcom();
+  const { categories, fetchCategories, handleDelete } = useEcom();
   const [page, setPage] = useState(1);
 
   useEffect(() => {
@@ -46,7 +46,15 @@ function AdminCategories() {
         </ul>
       </aside>
       <main className="w-4/5 p-4">
-        <h2 className="text-2xl font-bold mb-3">Categories</h2>
+        <h2 className="text-2xl font-bold mb-3 flex justify-between items-center">
+          Categories
+          <Link
+            to="/admin/addCategory"
+            className="bg-green-700 border-2 border-green-700 rounded-lg text-white font-normal text-[16px] px-4"
+          >
+            Add New
+          </Link>
+        </h2>
         <table className="w-full">
           <thead>
             <tr className="text-left">
@@ -72,7 +80,10 @@ function AdminCategories() {
                     <p>{item.name}</p>
                   </td>
                   <td className="p-2">
-                    <button className="bg-red-500 text-white p-1 rounded">
+                    <button
+                      className="bg-red-500 text-white p-1 rounded"
+                      onClick={() => handleDelete(item._id)}
+                    >
                       Delete
                     </button>
                   </td>

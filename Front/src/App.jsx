@@ -11,12 +11,14 @@ import HotDeals from "./Components/HotDeals";
 import EcomProvider from "./context/EcomProvider";
 import AuthProvider from "./Context/AuthProvider";
 import ProtectedRoute from "./Context/ProtectedRoute";
+import AdminAuthProvider from "./admin/Context/AdminAuthProvider";
 import AddCategory from "./admin/AddCategory";
 import AddProduct from "./admin/AddProduct";
 import AdminLogin from "./admin/AdminLogin";
 import AdminHome from "./admin/AdminHome";
 import AdminProducts from "./admin/AdminProducts";
 import AdminCategories from "./admin/AdminCategories";
+import AdminEcomProvider from "./admin/Context/AdminEcomProvider";
 
 const router = createBrowserRouter([
   {
@@ -114,11 +116,15 @@ const router = createBrowserRouter([
 function App() {
   return (
     <>
-      <AuthProvider>
-        <EcomProvider>
-          <RouterProvider router={router} />
-        </EcomProvider>
-      </AuthProvider>
+      <AdminAuthProvider>
+        <AdminEcomProvider>
+          <AuthProvider>
+            <EcomProvider>
+              <RouterProvider router={router} />
+            </EcomProvider>
+          </AuthProvider>
+        </AdminEcomProvider>
+      </AdminAuthProvider>
     </>
   );
 }

@@ -1,11 +1,12 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import instance from "../axiosConfig";
-import { useAuth } from "../Context/AuthProvider";
+import { useAdminAuth } from "./Context/AdminAuthProvider";
 
 function AdminLogin() {
   const navigate = useNavigate();
-  const { checkAuthAdmin } = useAuth();
+  // console.log(useAdminAuth);
+  const { checkAuthAdmin } = useAdminAuth();
 
   const [data, setData] = useState({
     email: "",

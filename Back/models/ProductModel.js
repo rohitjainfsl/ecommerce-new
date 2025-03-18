@@ -15,8 +15,8 @@ const productSchema = new mongoose.Schema({
     required: true,
   },
   category: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref:'category',
+    //type: either ObjectId or String
+    type: {},
     required: true,
   },
   OriginalPrice: {
@@ -31,10 +31,10 @@ const productSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  description:{
-    type:String,
-    required:true
-  }
+  description: {
+    type: String,
+    required: true,
+  },
 });
 
 const Product = mongoose.model("Product", productSchema);

@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
-import { useEcom } from "../Context/EcomProvider";
 import { useEffect, useState } from "react";
+import { useAdminEcom } from "./Context/AdminEcomProvider";
 
 function AdminProducts() {
-  const { product, fetchProduct } = useEcom();
+  const { product, fetchProduct, handleDelete } = useAdminEcom();
   const [page, setPage] = useState(1);
 
   useEffect(() => {
@@ -44,7 +44,15 @@ function AdminProducts() {
         </ul>
       </aside>
       <main className="w-4/5 p-4">
-        <h2 className="text-2xl font-bold mb-3">Products</h2>
+        <h2 className="text-2xl font-bold mb-3 flex justify-between items-center">
+          Products
+          <Link
+            to="/admin/addProduct"
+            className="bg-green-700 border-2 border-green-700 rounded-lg text-white font-normal text-[16px] px-4"
+          >
+            Add New
+          </Link>
+        </h2>
         <table className="w-full">
           <thead>
             <tr className="text-left">
@@ -76,7 +84,10 @@ function AdminProducts() {
                   <td className="p-2">{item.discountedPrice}</td>
                   <td className="p-2">{item.category.name}</td>
                   <td className="p-2">
-                    <button className="bg-red-500 text-white p-1 rounded">
+                    <button
+                      className="bg-red-500 text-white p-1 rounded"
+                      onClick={() => handleDelete(item._id, "product")}
+                    >
                       Delete
                     </button>
                   </td>

@@ -5,6 +5,7 @@ import { useEcom } from "../Context/EcomProvider";
 
 function AddProduct() {
   const { categories } = useEcom();
+  // console.log(categories);
   const [form, setForm] = useState({
     title: "",
     brand: "",
@@ -32,7 +33,7 @@ function AddProduct() {
       setForm((form) => ({ ...form, image: e.target.files[0] }));
     } else {
       const { name, value } = e.target;
-      setForm((form) => ({ ...form, [name]: value })); // [name] is a variable which can be anything like title, category and so on.
+      setForm((form) => ({ ...form, [name]: value }));
     }
   }
 
@@ -108,7 +109,7 @@ function AddProduct() {
             <option value="" selected disabled placeholder="Select Category">
               Select Category
             </option>
-            {categories.map((category, index) => {
+            {categories?.category?.map((category, index) => {
               return (
                 <option value={category._id} key={index}>
                   {category.name}
@@ -177,6 +178,7 @@ function AddProduct() {
             onChange={handleChange}
             className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
           />
+          
           <button
             type="submit"
             className="w-full py-2 px-4 bg-blue-500 text-white rounded-lg hover:bg-blue-600"

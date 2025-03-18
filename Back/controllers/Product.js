@@ -113,14 +113,38 @@ export async function fetchCategories(req, res) {
   }
 }
 
-export async function deleteProduct(req, res) {
-  const { id } = req.body;
+export async function deleteProductOrCategory(req, res) {
+  try {
+    const { id } = req.params;
 
-  if (!id) return res.status(400).send({ message: "No ID Found" });
+    if (!id) return res.status(400).send({ message: "No ID Found" });
 
-  const deletedCategory = await categoryModel.findByIdAndDelete(id);
-  if (!deletedCategory)
-    return res.status(400).send({ message: "No category with this ID found" });
+    let whatToDelete;
+
+    whatToDelete = await Product.findByIdAndDelete(id);
+
+    if (!whatToDelete) {
+      whatToDelete = await categoryModel.findById(id);
+
+      const productsToModify = await Product.find({
+        category: whatToDelete._id,
+      });
+
+      const modifiedProducts = productsToModify.forEach(async (product) => {
+        await product.updateOne({ category: "" });
+      });
+
+      await whatToDelete.deleteOne();
+    }
+
+    if (!whatToDelete)
+      return res
+        .status(400)
+        .send({ message: "Could not delete the selected resource" });
+
+    return res.send({ message: "Resource Deleted" });
+  } catch (error) {
+    console.log(error.message);
+    return res.status(500).send({ message: error.message });
+  }
 }
-
-export async function deleteCategory(req, res) {}

@@ -1,5 +1,5 @@
 import express from "express";
-import { loginAdmin } from "../controllers/admin.js";
+import { loginAdmin, count } from "../controllers/admin.js";
 import { checkAdmin } from "../middlewares/auth.js";
 
 const adminRouter = express.Router();
@@ -20,4 +20,5 @@ adminRouter.post("/logout", async (req, res) => {
 adminRouter.get("/check", checkAdmin, (req, res) => {
   res.send({ message: "admin authenticated", admin: req.admin });
 });
+adminRouter.get("/count", count);
 export default adminRouter;

@@ -1,19 +1,12 @@
 /* eslint-disable react-refresh/only-export-components */
 /* eslint-disable react/prop-types */
 
-import { createContext, useContext, useState } from "react"; // create and use context are react hooks used to manage and consume context.
-// It is an api fetching tool used to make http requests.
-import instance from "../axiosConfig";
-// import axios from "axios"
+import { createContext, useContext, useState } from "react";
+import instance from "../../axiosConfig";
 
-// Context in react is made to solve the problem of prop drilling and to provide shared state or functions to multiple components.
-// Context creates a central state (like a global store) that any component can access.
+const AdminEcom = createContext();
 
-const ecomContext = createContext(); // created a context called ecomContext which  will be used to share state and functions across the app without passing props manually.
-
-function EcomProvider({ children }) {
-  // when any setstate (ex setCart, setWishlist and so on) is called , React re-renders any components that consume the (cart, wishlist) state (via the useEcom hook. )
-
+function AdminEcomProvider({ children }) {
   const [product, setProduct] = useState([]);
   const [cart, setCart] = useState([]);
   const [wishlist, setWishlist] = useState([]);
@@ -21,23 +14,37 @@ function EcomProvider({ children }) {
   const [categories, setCategories] = useState([]);
   const [productsByCat, setProductsByCat] = useState([]);
   const [dealProduct, setDealProduct] = useState([]);
+  const [count, setCount] = useState({
+    categories: 0,
+    orders: 0,
+    products: 0,
+    users: 0,
+  });
 
   // fetching all Products
   async function fetchProduct(page = null) {
     try {
       setLoading(true);
-      const response = await instance.get(
-        page ? `product/get/?page=${page}` : `product/get`,
-        {
-          withCredentials: true,
-        }
-      );
+      const response = await instance.get(`product/get/?page=${page}`, {
+        withCredentials: true,
+      });
       setProduct(response.data);
     } catch (error) {
       console.log(error);
       setLoading(false);
     } finally {
       setLoading(false);
+    }
+  }
+
+  async function getCount() {
+    try {
+      const response = await instance.get("/admin/count", {
+        withCredentials: true,
+      });
+      setCount(response.data.count);
+    } catch (error) {
+      console.log(error);
     }
   }
 
@@ -54,7 +61,6 @@ function EcomProvider({ children }) {
   async function fetchCategories() {
     try {
       setLoading(true);
-      // const response = await axios.get("https://ecommerce-api-8ga2.onrender.com/api/product/categories/all");
       const response = await instance.get("/product/category");
       setCategories(response.data);
     } catch (error) {
@@ -62,6 +68,21 @@ function EcomProvider({ children }) {
       setLoading(false);
     } finally {
       setLoading(false);
+    }
+  }
+
+  //deleting products & categories
+  async function handleDelete(idToDelete, whatToDelete) {
+    try {
+      const response = await instance.delete(`/product/${idToDelete}`, {
+        withCredentials: true,
+      });
+      if (response.status === 200) {
+        window.location.href =
+          whatToDelete === "product" ? "/admin/products" : "/admin/categories";
+      }
+    } catch (error) {
+      console.log(error);
     }
   }
 
@@ -124,7 +145,6 @@ function EcomProvider({ children }) {
 
   // function to check whether product is there in the cart or not.
   function existInCart(id) {
-    // find () searches the array to find the first product that matches with the given id.
     const productAlreadyExists = cart.find(
       (cartItem) => cartItem.product._id === id
     );
@@ -133,7 +153,6 @@ function EcomProvider({ children }) {
 
   // function to remove item from cart.
   function removeFromCart(id) {
-    // filter function returns all those product whose id is not equal to given id in form of an array.
     setCart(cart.filter((item) => item.product._id !== id));
   }
 
@@ -155,8 +174,7 @@ function EcomProvider({ children }) {
   }
 
   return (
-    <ecomContext.Provider
-      // below is the shared state and functions
+    <AdminEcom.Provider
       value={{
         product,
         cart,
@@ -176,15 +194,18 @@ function EcomProvider({ children }) {
         fetchCategories,
         filterByCategory,
         fetchHotDeals,
+        handleDelete,
+        getCount,
+        count,
       }}
     >
       {children}
-    </ecomContext.Provider>
+    </AdminEcom.Provider>
   );
 }
 
-export function useEcom() {
-  return useContext(ecomContext);
+export function useAdminEcom() {
+  return useContext(AdminEcom);
 }
 
-export default EcomProvider;
+export default AdminEcomProvider;

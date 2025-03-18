@@ -4,13 +4,13 @@ import { FaCartShopping } from "react-icons/fa6";
 import { FaHeart } from "react-icons/fa";
 import { useEffect, useState } from "react";
 import { useAuth } from "../Context/AuthProvider";
+import { useAdminAuth } from "../admin/Context/AdminAuthProvider";
 
 function Header() {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const { cart, categories, fetchCategories } = useEcom();
-  const { isUserLoggedIn, logout, isAdminLoggedIn } = useAuth();
-
-  // When the Header component mounts for the first time and also it is without dependency which means it will not run again unless the component is unmounted and remounted.
+  const { isUserLoggedIn, logout } = useAuth();
+  const { isAdminLoggedIn } = useAdminAuth();
 
   useEffect(() => {
     fetchCategories();
