@@ -7,14 +7,21 @@ import { useAuth } from "../Context/AuthProvider";
 import { useAdminAuth } from "../admin/Context/AdminAuthProvider";
 
 function Header() {
-  const [dropdownOpen, setDropdownOpen] = useState(false);
-  const { cart, categories, fetchCategories } = useEcom();
+  const { cart, fetchCategories } = useEcom();
   const { isUserLoggedIn, logout } = useAuth();
   const { isAdminLoggedIn } = useAdminAuth();
 
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [categories, setCategories] = useState([]);
+
   useEffect(() => {
-    fetchCategories();
+    fetchData();
   }, []);
+
+  async function fetchData() {
+    const categories = await fetchCategories();
+    setCategories(categories.category);
+  }
 
   return (
     <header className="flex justify-between bg-amber-200 px-12 py-2">
@@ -80,18 +87,6 @@ function Header() {
             </ul>
           </div>
         </li>
-        <li>
-          {isUserLoggedIn || isAdminLoggedIn ? (
-            <Link
-              onClick={logout}
-              to={isUserLoggedIn ? `/user/login` : `/admin/login`}
-            >
-              Logout
-            </Link>
-          ) : (
-            <NavLink to="/user/login">Login</NavLink>
-          )}
-        </li>
 
         <li>
           <NavLink to="/wishlist">
@@ -114,6 +109,19 @@ function Header() {
               <FaCartShopping className="text-lg mt-1" />
             </p>
           </NavLink>
+        </li>
+
+        <li className="pl-0 md:pl-4">
+          {isUserLoggedIn || isAdminLoggedIn ? (
+            <Link
+              onClick={logout}
+              to={isUserLoggedIn ? `/user/login` : `/admin/login`}
+            >
+              Logout
+            </Link>
+          ) : (
+            <NavLink to="/user/login">Login</NavLink>
+          )}
         </li>
       </ul>
     </header>

@@ -1,25 +1,41 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useEcom } from "../context/EcomProvider";
 import DisplayProduct from "../components/DisplayProduct";
 import Loader from "../components/Loader";
 
-
-function ShopByCategory() {
-    const { categoryId } = useParams();
-  const { filterByCategory, productsByCat, loading } = useEcom();
-
-
-  // Below useEffect is fetching the product based on the category (ie accessories, Food, mobiles and so on) provided. 
-  useEffect(() => {
-    if (categoryId) {
-      filterByCategory(categoryId);
-    }
-  }, [categoryId]);
- 
-  return loading ? <Loader /> : <DisplayProduct product={productsByCat} />;
-  
+function NoProductsFoundBanner() {
+  return (
+    <div className="text-center text-2xl text-red-500 font-bold my-5">
+      No Products Found
+    </div>
+  );
 }
 
-export default ShopByCategory
+function ShopByCategory() {
+  const { categoryName } = useParams();
+  const { filterByCategory, loading } = useEcom();
+  const [productsByCat, setProductsByCat] = useState([]);
+
+  useEffect(() => {
+    if (categoryName) {
+      fetchData();
+    }
+  }, [categoryName]);
+
+  async function fetchData() {
+    const products = await filterByCategory(categoryName, true);
+    setProductsByCat(products);
+  }
+
+  if (loading) return <Loader />;
+
+  return productsByCat?.products?.length === 0 ? (
+    <NoProductsFoundBanner />
+  ) : (
+    <DisplayProduct product={productsByCat} />
+  );
+}
+
+export default ShopByCategory;

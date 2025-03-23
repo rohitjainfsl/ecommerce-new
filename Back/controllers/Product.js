@@ -24,6 +24,13 @@ export async function addCategory(req, res) {
   try {
     const file = req.file;
     if (!file) return res.status(404).send({ message: "File Not Found" });
+
+    //CHECKING IF CATEGORY ALREADY EXISTS
+    const exists = await categoryModel.find({ name: req.body.name });
+    if (exists.length > 0)
+      return res.status(400).send({ message: "Category Already Exists" });
+
+    //UPLOADING CATEGORY ICON
     const secure_url = await uploadToCloudinary(req);
 
     const newCategory = new categoryModel({ ...req.body, image: secure_url });
@@ -40,13 +47,21 @@ export async function fetchProduct(req, res) {
   try {
     let query = {};
     if (req.params.id) {
-      query._id = req.params.id;
+      // query._id = req.params.id;
+      query.slug = req.params.id;
     }
     if (req.query.category) {
       const categoryId = await categoryModel.find({
         name: { $regex: new RegExp(`^${req.query.category}$`, "i") },
       });
       query.category = categoryId;
+    }
+
+    if (req.query.categoryName) {
+      const category = await categoryModel.find({
+        name: { $regex: new RegExp(`^${req.query.categoryName}$`, "i") },
+      });
+      query.category = category[0]._id;
     }
 
     const page = req.query.page ? Number(req.query.page) : 1;

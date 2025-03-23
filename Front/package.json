@@ -8,7 +8,6 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview"
-
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.0.6",
@@ -17,6 +16,7 @@
     "react-dom": "^19.0.0",
     "react-icons": "^5.4.0",
     "react-router-dom": "^7.1.5",
+    "slugify": "^1.6.6",
     "tailwindcss": "^4.0.6"
   },
   "devDependencies": {

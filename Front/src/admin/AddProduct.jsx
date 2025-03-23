@@ -1,13 +1,26 @@
 /* eslint-disable no-unused-vars */
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import slugify from "slugify";
 import instance from "../axiosConfig";
 import { useEcom } from "../Context/EcomProvider";
 
 function AddProduct() {
-  const { categories } = useEcom();
+  const { fetchCategories } = useEcom();
+  const [categories, setCategories] = useState([]);
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  async function fetchData() {
+    const response = await fetchCategories();
+    setCategories(response.category);
+  }
+
   // console.log(categories);
   const [form, setForm] = useState({
     title: "",
+    slug: "",
     brand: "",
     category: "",
     OriginalPrice: "",
@@ -29,6 +42,12 @@ function AddProduct() {
   }
 
   function handleChange(e) {
+    // if (e.target.name === "category") {
+    //   setForm((form) => ({
+    //     ...form,
+    //     category: [...form.category, e.target.value],
+    //   }));
+    // }
     if (e.target.name === "image") {
       setForm((form) => ({ ...form, image: e.target.files[0] }));
     } else {
@@ -42,6 +61,7 @@ function AddProduct() {
     try {
       const formData = new FormData();
       formData.append("title", form.title);
+      formData.append("slug", form.slug);
       formData.append("brand", form.brand);
       formData.append("category", form.category);
       formData.append("OriginalPrice", form.OriginalPrice);
@@ -88,8 +108,25 @@ function AddProduct() {
             name="title"
             value={form.title}
             onChange={handleChange}
+            onBlur={(e) =>
+              setForm((form) => ({
+                ...form,
+                slug: slugify(e.target.value, {
+                  lower: true,
+                  remove: /[*+~.()'"!:@/]/g,
+                }),
+              }))
+            }
             className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
             autoFocus
+          />
+          <input
+            type="text"
+            placeholder="Enter Product Slug"
+            name="slug"
+            value={form.slug}
+            onChange={handleChange}
+            className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
           />
           <input
             type="text"
@@ -106,10 +143,10 @@ function AddProduct() {
             onChange={handleChange}
             className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
           >
-            <option value="" selected disabled placeholder="Select Category">
+            <option value="" disabled placeholder="Select Category">
               Select Category
             </option>
-            {categories?.category?.map((category, index) => {
+            {categories.map((category, index) => {
               return (
                 <option value={category._id} key={index}>
                   {category.name}
@@ -178,7 +215,7 @@ function AddProduct() {
             onChange={handleChange}
             className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
           />
-          
+
           <button
             type="submit"
             className="w-full py-2 px-4 bg-blue-500 text-white rounded-lg hover:bg-blue-600"

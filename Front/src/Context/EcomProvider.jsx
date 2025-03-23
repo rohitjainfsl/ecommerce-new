@@ -1,26 +1,19 @@
 /* eslint-disable react-refresh/only-export-components */
 /* eslint-disable react/prop-types */
 
-import { createContext, useContext, useState } from "react"; // create and use context are react hooks used to manage and consume context.
-// It is an api fetching tool used to make http requests.
+import { createContext, useContext, useState } from "react";
 import instance from "../axiosConfig";
-// import axios from "axios"
-
-// Context in react is made to solve the problem of prop drilling and to provide shared state or functions to multiple components.
-// Context creates a central state (like a global store) that any component can access.
-
-const ecomContext = createContext(); // created a context called ecomContext which  will be used to share state and functions across the app without passing props manually.
+const ecomContext = createContext();
 
 function EcomProvider({ children }) {
-  // when any setstate (ex setCart, setWishlist and so on) is called , React re-renders any components that consume the (cart, wishlist) state (via the useEcom hook. )
-
   const [product, setProduct] = useState([]);
   const [cart, setCart] = useState([]);
   const [wishlist, setWishlist] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [categories, setCategories] = useState([]);
-  const [productsByCat, setProductsByCat] = useState([]);
   const [dealProduct, setDealProduct] = useState([]);
+  // const [singleProduct, setSingleProduct] = useState([]);
+  // const [categories, setCategories] = useState([]);
+  // const [productsByCat, setProductsByCat] = useState([]);
 
   // fetching all Products
   async function fetchProduct(page = null) {
@@ -33,6 +26,20 @@ function EcomProvider({ children }) {
         }
       );
       setProduct(response.data);
+    } catch (error) {
+      console.log(error);
+      setLoading(false);
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  async function fetchSingleProduct(id) {
+    try {
+      setLoading(true);
+      const response = await instance.get(`/product/get/${id}`);
+      // setSingleProduct(response.data.products[0]);
+      return response.data.products[0];
     } catch (error) {
       console.log(error);
       setLoading(false);
@@ -54,9 +61,9 @@ function EcomProvider({ children }) {
   async function fetchCategories() {
     try {
       setLoading(true);
-      // const response = await axios.get("https://ecommerce-api-8ga2.onrender.com/api/product/categories/all");
       const response = await instance.get("/product/category");
-      setCategories(response.data);
+      // setCategories(response.data);
+      return response.data;
     } catch (error) {
       console.log(error);
       setLoading(false);
@@ -66,13 +73,15 @@ function EcomProvider({ children }) {
   }
 
   // filtering category
-  async function filterByCategory(category) {
+  async function filterByCategory(category, isName = false) {
     try {
       setLoading(true);
-      // const response = await axios.get("https://ecommerce-api-8ga2.onrender.com/api/product/?category=" + category);
-      const response = await instance.get("/product/get/?category=" + category);
-      console.log(response.data);
-      setProductsByCat(response.data);
+      const url = isName
+        ? "/product/get/?categoryName="
+        : "/product/get/?category=";
+      const response = await instance.get(url + category);
+      // console.log(response.data);
+      return response.data;
     } catch (error) {
       console.log(error);
       setLoading(false);
@@ -162,8 +171,6 @@ function EcomProvider({ children }) {
         cart,
         loading,
         wishlist,
-        categories,
-        productsByCat,
         dealProduct,
         fetchProduct,
         addToCart,
@@ -176,6 +183,7 @@ function EcomProvider({ children }) {
         fetchCategories,
         filterByCategory,
         fetchHotDeals,
+        fetchSingleProduct,
       }}
     >
       {children}
