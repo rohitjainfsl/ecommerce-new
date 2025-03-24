@@ -1,15 +1,18 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, Navigate, useParams } from "react-router-dom";
 import { useEcom } from "../context/EcomProvider";
 import Loader from "../components/Loader";
+import { useAuth } from "../Context/AuthProvider";
 
 function SingleProduct() {
   const { id } = useParams();
-  const { fetchSingleProduct, fetchCategories } = useEcom();
+  const { fetchSingleProduct, fetchCategories, addToWishlist } = useEcom();
   const [categoryName, setCategoryName] = useState("");
   const [loading, setLoading] = useState(false);
   const [categories, setCategories] = useState([]);
   const [singleProduct, setSingleProduct] = useState([]);
+
+  const { isUserLoggedIn, loggedInUser } = useAuth();
 
   useEffect(() => {
     fetchData();
@@ -30,6 +33,14 @@ function SingleProduct() {
         .name
     );
   }, [singleProduct, categories]);
+
+  function handleAddToWishlist() {
+    isUserLoggedIn ? (
+      addToWishlist(singleProduct._id)
+    ) : (
+      <Navigate to={`/user/login`} />
+    );
+  }
 
   if (loading) return <Loader />;
 
@@ -53,7 +64,12 @@ function SingleProduct() {
             <p>{singleProduct.description}</p>
 
             <button>Add To Cart</button>
-            <button>Add To Wishlist</button>
+            <Link
+              className="rounded px-2 py-1 bg-blue-400 text-white"
+              onClick={handleAddToWishlist}
+            >
+              Add to Wishlist
+            </Link>
           </div>
         </div>
       )}

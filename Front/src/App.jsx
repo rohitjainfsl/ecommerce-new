@@ -31,7 +31,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/wishlist",
-        element: <Wishlist />,
+        element: (
+          <ProtectedRoute>
+            <Wishlist fallback="user/login" />
+          </ProtectedRoute>
+        ),
       },
       {
         path: "/cart",

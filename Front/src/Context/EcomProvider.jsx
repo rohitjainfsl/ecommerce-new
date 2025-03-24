@@ -3,6 +3,8 @@
 
 import { createContext, useContext, useState } from "react";
 import instance from "../axiosConfig";
+import { useAuth } from "./AuthProvider";
+import { Navigate } from "react-router-dom";
 const ecomContext = createContext();
 
 function EcomProvider({ children }) {
@@ -11,6 +13,7 @@ function EcomProvider({ children }) {
   const [wishlist, setWishlist] = useState([]);
   const [loading, setLoading] = useState(false);
   const [dealProduct, setDealProduct] = useState([]);
+
   // const [singleProduct, setSingleProduct] = useState([]);
   // const [categories, setCategories] = useState([]);
   // const [productsByCat, setProductsByCat] = useState([]);
@@ -91,8 +94,9 @@ function EcomProvider({ children }) {
   }
 
   // addtowishlist function
-  function addToWishlist(product) {
-    if (existInWishlist(product._id)) {
+  function addToWishlist(productSlug) {
+    console.log("addToWislist");
+    if (existInWishlist(productSlug)) {
       alert("Already exist in wishlist");
     } else {
       const obj = { product };
@@ -101,7 +105,8 @@ function EcomProvider({ children }) {
   }
 
   // function to check whether product is there in the wishlist or not.
-  function existInWishlist(id) {
+  async function existInWishlist(slug) {
+    const response = await instance.get(`/user/checkInWishlist?slug=${slug}`);
     const productAlreadyExists = wishlist.find(
       (wishlistItem) => wishlistItem.product._id === id
     );

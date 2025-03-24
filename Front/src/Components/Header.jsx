@@ -7,7 +7,7 @@ import { useAuth } from "../Context/AuthProvider";
 import { useAdminAuth } from "../admin/Context/AdminAuthProvider";
 
 function Header() {
-  const { cart, fetchCategories } = useEcom();
+  const { cart, wishlist, fetchCategories } = useEcom();
   const { isUserLoggedIn, logout } = useAuth();
   const { isAdminLoggedIn } = useAdminAuth();
 
@@ -37,7 +37,7 @@ function Header() {
           <button
             id="dropdownDefaultButton"
             data-dropdown-toggle="dropdown"
-            className="rounded-lg px-3 text-center inline-flex items-center relative cursor-pointer"
+            className="rounded-lg px-1 text-center inline-flex items-center relative cursor-pointer"
             type="button"
             onClick={() => setDropdownOpen((prev) => !prev)}
           >
@@ -88,10 +88,13 @@ function Header() {
           </div>
         </li>
 
-        <li>
+        <li className="md:px-2">
           <NavLink to="/wishlist">
-            <p className="flex items-center">
-              Wishlist{" "}
+            <p className="flex items-center relative">
+              Wishlist
+              <span className="absolute right-[-14px] top-[-9px] rounded-full bg-red-600 text-white px-[5px] mt-1 text-xs">
+                {wishlist.length > 0 ? wishlist.length : wishlist.length}
+              </span>
               <span className="px-1">
                 <FaHeart />
               </span>
@@ -99,7 +102,7 @@ function Header() {
           </NavLink>
         </li>
 
-        <li>
+        <li className="md:px-2">
           <NavLink to="/cart">
             <p className="flex relative">
               Cart

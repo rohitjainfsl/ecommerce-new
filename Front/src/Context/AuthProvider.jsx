@@ -49,6 +49,7 @@ function AuthProvider({ children }) {
     <AuthContext.Provider
       value={{
         isUserLoggedIn,
+        loggedInUser,
         logout,
         checkAuth,
       }}

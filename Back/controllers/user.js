@@ -56,3 +56,19 @@ export async function loginUser(req, res) {
       .send({ message: "Admin not login", errorString: error.message });
   }
 }
+
+export async function checkInWishlist(req, res) {
+  try {
+    const { productId } = req.params;
+    const { userId } = req.body;
+
+    const user = await User.findOneAndUpdate(userId, {
+      $addToSet: { wishlist: productId },
+    });
+  } catch (error) {
+    return res.status(500).send({
+      message: "Product not added to wishlist",
+      errorString: error.message,
+    });
+  }
+}
