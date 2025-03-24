@@ -7,12 +7,13 @@ import { useAuth } from "../Context/AuthProvider";
 import { useAdminAuth } from "../admin/Context/AdminAuthProvider";
 
 function Header() {
-  const { cart, wishlist, fetchCategories } = useEcom();
+  const { cart, fetchCategories, fetchWishlist } = useEcom();
   const { isUserLoggedIn, logout } = useAuth();
   const { isAdminLoggedIn } = useAdminAuth();
 
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [categories, setCategories] = useState([]);
+  const [wishlist, setWishlist] = useState([]);
 
   useEffect(() => {
     fetchData();
@@ -21,6 +22,8 @@ function Header() {
   async function fetchData() {
     const categories = await fetchCategories();
     setCategories(categories.category);
+    const data = await fetchWishlist();
+    setWishlist(data);
   }
 
   return (
@@ -93,7 +96,7 @@ function Header() {
             <p className="flex items-center relative">
               Wishlist
               <span className="absolute right-[-14px] top-[-9px] rounded-full bg-red-600 text-white px-[5px] mt-1 text-xs">
-                {wishlist.length > 0 ? wishlist.length : wishlist.length}
+                {wishlist.length}
               </span>
               <span className="px-1">
                 <FaHeart />

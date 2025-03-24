@@ -3,8 +3,6 @@
 
 import { createContext, useContext, useState } from "react";
 import instance from "../axiosConfig";
-import { useAuth } from "./AuthProvider";
-import { Navigate } from "react-router-dom";
 const ecomContext = createContext();
 
 function EcomProvider({ children }) {
@@ -13,10 +11,6 @@ function EcomProvider({ children }) {
   const [wishlist, setWishlist] = useState([]);
   const [loading, setLoading] = useState(false);
   const [dealProduct, setDealProduct] = useState([]);
-
-  // const [singleProduct, setSingleProduct] = useState([]);
-  // const [categories, setCategories] = useState([]);
-  // const [productsByCat, setProductsByCat] = useState([]);
 
   // fetching all Products
   async function fetchProduct(page = null) {
@@ -93,6 +87,17 @@ function EcomProvider({ children }) {
     }
   }
 
+  async function fetchWishlist() {
+    try {
+      const response = await instance.get("/user/getWishlist", {
+        withCredentials: true,
+      });
+      return response.data.wishlist;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   // addtowishlist function
   async function addToWishlist(productSlug) {
     try {
@@ -104,7 +109,10 @@ function EcomProvider({ children }) {
           { productSlug },
           { withCredentials: true }
         );
-        console.log(response);
+        if (response.status === 200) {
+          console.log(response.data);
+          setWishlist([...wishlist, response.data.wishlist]);
+        }
       }
     } catch (error) {
       console.log(error);
@@ -196,6 +204,7 @@ function EcomProvider({ children }) {
         filterByCategory,
         fetchHotDeals,
         fetchSingleProduct,
+        fetchWishlist,
       }}
     >
       {children}

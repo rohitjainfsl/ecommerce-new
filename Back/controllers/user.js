@@ -98,7 +98,24 @@ export async function addToWishlist(req, res) {
       { new: true }
     );
     if (!user) return res.status(404).send({ message: "User not found" });
-    return res.send({ message: "Product added to wishlist", user });
+    return res.send({
+      message: "Product added to wishlist",
+      user: user._id,
+      wishlist: user.wishlist,
+    });
+  } catch (error) {
+    return res.status(500).send({
+      errorString: error.message,
+    });
+  }
+}
+
+export async function getWishlist(req, res){
+  try {
+    const { id } = req.user;
+    const user = await User.findById(id);
+    if (!user) return res.status(404).send({ message: "User not found" });
+    return res.send({ wishlist: user.wishlist });
   } catch (error) {
     return res.status(500).send({
       errorString: error.message,

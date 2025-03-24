@@ -6,7 +6,8 @@ import { useAuth } from "../Context/AuthProvider";
 
 function SingleProduct() {
   const { id } = useParams();
-  const { fetchSingleProduct, fetchCategories, addToWishlist } = useEcom();
+  const { fetchSingleProduct, fetchCategories, addToWishlist } =
+    useEcom();
   const [categoryName, setCategoryName] = useState("");
   const [loading, setLoading] = useState(false);
   const [categories, setCategories] = useState([]);
