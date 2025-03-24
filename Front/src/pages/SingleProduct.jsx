@@ -35,11 +35,10 @@ function SingleProduct() {
   }, [singleProduct, categories]);
 
   function handleAddToWishlist() {
-    isUserLoggedIn ? (
-      addToWishlist(singleProduct._id)
-    ) : (
-      <Navigate to={`/user/login`} />
-    );
+    isUserLoggedIn
+      ? addToWishlist(singleProduct.slug)
+      : (window.location.href =
+          "/user/login?referer=/product/" + singleProduct.slug);
   }
 
   if (loading) return <Loader />;

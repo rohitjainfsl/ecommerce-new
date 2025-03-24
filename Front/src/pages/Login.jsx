@@ -34,7 +34,8 @@ function Login() {
         // URLSearchParams is used to fetch the URL of the current location of the window.
         const searchParams = new URLSearchParams(window.location.search);
         const URLParam = searchParams.get("referer");
-        if (URLParam !== "") {
+        console.log("URLParam", URLParam);
+        if (URLParam) {
           window.location.href = URLParam;
         } else {
           navigate("/");

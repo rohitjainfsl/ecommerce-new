@@ -94,23 +94,30 @@ function EcomProvider({ children }) {
   }
 
   // addtowishlist function
-  function addToWishlist(productSlug) {
-    console.log("addToWislist");
-    if (existInWishlist(productSlug)) {
-      alert("Already exist in wishlist");
-    } else {
-      const obj = { product };
-      setWishlist([...wishlist, obj]);
+  async function addToWishlist(productSlug) {
+    try {
+      if (await existInWishlist(productSlug)) {
+        alert("Already exist in wishlist");
+      } else {
+        const response = await instance.post(
+          "/user/addToWishlist",
+          { productSlug },
+          { withCredentials: true }
+        );
+        console.log(response);
+      }
+    } catch (error) {
+      console.log(error);
     }
   }
 
   // function to check whether product is there in the wishlist or not.
   async function existInWishlist(slug) {
-    const response = await instance.get(`/user/checkInWishlist?slug=${slug}`);
-    const productAlreadyExists = wishlist.find(
-      (wishlistItem) => wishlistItem.product._id === id
-    );
-    return productAlreadyExists ? true : false;
+    const response = await instance.get(`/user/checkInWishlist/${slug}`, {
+      withCredentials: true,
+    });
+    // console.log(response.data.exists);
+    return response.data.exists ? true : false;
   }
 
   // function to remove item from wishlist.
