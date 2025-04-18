@@ -93,13 +93,21 @@ function EcomProvider({ children }) {
         withCredentials: true,
       });
       const wishlistData = response.data.wishlist;
+
+      console.log(wishlistData);
+
       const populatedWishlist = await Promise.all(
         wishlistData.map(async (productId) => {
-          const productResponse = await instance.get(`/product/get/${productId}`);
+          const productResponse = await instance.get(
+            `/product/get/${productId}`
+          );
+          console.log(productResponse);
           return { product: productResponse.data.products[0] };
         })
       );
+      console.log(populatedWishlist);
       setWishlist(populatedWishlist);
+      // return populatedWishlist;
     } catch (error) {
       console.log(error);
     }
@@ -142,7 +150,9 @@ function EcomProvider({ children }) {
 
   // Add to Cart function
   function addToCart(product) {
-    const existingCartItem = cart.find((item) => item.product._id === product._id);
+    const existingCartItem = cart.find(
+      (item) => item.product._id === product._id
+    );
     if (existingCartItem) {
       setCart(
         cart.map((item) =>
@@ -168,7 +178,10 @@ function EcomProvider({ children }) {
         item.product._id === productId
           ? {
               ...item,
-              quantity: action === "increment" ? item.quantity + 1 : Math.max(item.quantity - 1, 1),
+              quantity:
+                action === "increment"
+                  ? item.quantity + 1
+                  : Math.max(item.quantity - 1, 1),
             }
           : item
       )
@@ -187,7 +200,7 @@ function EcomProvider({ children }) {
         fetchProduct,
         addToCart,
         removeFromCart,
-        
+
         updateQuantity,
         addToWishlist,
         existInWishlist,

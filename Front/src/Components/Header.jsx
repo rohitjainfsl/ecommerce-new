@@ -7,27 +7,26 @@ import { useAuth } from "../Context/AuthProvider";
 import { useAdminAuth } from "../admin/Context/AdminAuthProvider";
 
 function Header() {
-  const { cart, fetchCategories, fetchWishlist } = useEcom();
+  const { cart, fetchCategories, fetchWishlist, wishlist } = useEcom();
   const { isUserLoggedIn, logout } = useAuth();
   const { isAdminLoggedIn } = useAdminAuth();
 
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [categories, setCategories] = useState([]);
-  const [wishlist, setWishlist] = useState([]);
+  // const [wishlist, setWishlist] = useState([]);
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [isUserLoggedIn]);
 
   async function fetchData() {
     const categories = await fetchCategories();
     setCategories(categories.category);
-    const data = await fetchWishlist();
-    setWishlist(data);
+    await fetchWishlist();
   }
 
-  const wishlistCount = wishlist?.filter((item) => item?.product)?.length || 0;
-  console.log("wishlistcount", wishlistCount);
+  // const wishlistCount = wishlist?.filter((item) => item?.product)?.length || 0;
+  // console.log("wishlistcount", wishlistCount);
 
   return (
     <header className="flex justify-between bg-amber-200 px-12 py-2">
@@ -99,7 +98,7 @@ function Header() {
             <p className="flex items-center relative">
               Wishlist
               <span className="absolute right-[-14px] top-[-9px] rounded-full bg-red-600 text-white px-[5px] mt-1 text-xs">
-                {wishlistCount}
+                {wishlist?.length > 0 ? wishlist.length : 0}
               </span>
               <span className="px-1">
                 <FaHeart />

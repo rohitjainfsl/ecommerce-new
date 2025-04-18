@@ -49,10 +49,10 @@ function Cart() {
                         <strong>Brand:- </strong>
                         {item.product.brand}
                       </span>
-                      <span>
+                      {/* <span>
                         <strong>Description:- </strong>
                         {item.product.description}
-                      </span>
+                      </span> */}
                     </div>
                     <div className="quantityChanger flex mt-2">
                       {item.quantity === 1 ? (

@@ -19,8 +19,8 @@ const userSchema = new mongoose.Schema({
   },
   wishlist: [
     {
-      type: mongoose.Schema.Types.ObjectID,
-      ref: "products",
+      type: String,
+      unique: true,
     },
   ],
   role: {

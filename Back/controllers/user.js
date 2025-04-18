@@ -94,7 +94,7 @@ export async function addToWishlist(req, res) {
 
     const user = await User.findByIdAndUpdate(
       id,
-      { $push: { wishlist: product._id } },
+      { $push: { wishlist: productSlug } },
       { new: true }
     );
     if (!user) return res.status(404).send({ message: "User not found" });
@@ -110,7 +110,7 @@ export async function addToWishlist(req, res) {
   }
 }
 
-export async function getWishlist(req, res){
+export async function getWishlist(req, res) {
   try {
     const { id } = req.user;
     const user = await User.findById(id);

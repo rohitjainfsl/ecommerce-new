@@ -3,8 +3,9 @@ import { Link } from "react-router-dom";
 import { MdOutlineCurrencyRupee } from "react-icons/md";
 
 function Wishlist() {
-  const { wishlist } = useEcom(); // this useEcom is nothing but say useContext(ecomContext). 
+  const { wishlist } = useEcom(); // this useEcom is nothing but say useContext(ecomContext).
 
+  // console.log("wishlist: ", wishlist);
   return (
     <div>
       {wishlist.length === 0 ? (
@@ -16,15 +17,12 @@ function Wishlist() {
         </div>
       ) : (
         <>
-          <div className='mx-5'>
-            {wishlist.map((Item) => {
-              console.log(Item)
+          <div className="mx-5">
+            {wishlist?.map((Item) => {
+              // console.log(Item);
               return (
                 <div key={Item.product._id}>
-                  <img
-                    src={Item.product.image}
-                    className="w-[9rem] h-[9rem]"
-                  />
+                  <img src={Item.product.image} className="w-[9rem] h-[9rem]" />
                   <div>
                     <h3 className="text-2xl mb-2">{Item.product.title}</h3>
                     <p className="flex items-center py-1 font-bold">
