@@ -3,16 +3,22 @@ import { useEffect, useState } from "react";
 import { useEcom } from "../context/EcomProvider";
 import Loader from "../components/Loader";
 import DisplayProduct from "../Components/DisplayProduct";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 
 function Home() {
   const { product, loading, fetchProduct } = useEcom();
-  const [page, setPage] = useState(1);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const initialPage = Number(searchParams.get("page")) || 1;
+  const [page, setPage] = useState(initialPage);
 
   useEffect(() => {
     if (page > 1) fetchProduct(page);
     else fetchProduct();
   }, [page]);
+
+  useEffect(() => {
+    setSearchParams({ page });
+  }, [page, setSearchParams]);
 
   return loading ? (
     <Loader />

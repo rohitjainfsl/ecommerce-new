@@ -6,7 +6,7 @@ import { useAuth } from "../Context/AuthProvider";
 
 function SingleProduct() {
   const { id } = useParams();
-  const { fetchSingleProduct, fetchCategories, addToWishlist } =
+  const { fetchSingleProduct, fetchCategories, addToWishlist, addToCart } =
     useEcom();
   const [categoryName, setCategoryName] = useState("");
   const [loading, setLoading] = useState(false);
@@ -29,15 +29,24 @@ function SingleProduct() {
   }
 
   useEffect(() => {
-    setCategoryName(
-      categories?.category?.find((obj) => obj._id === singleProduct.category)
-        .name
-    );
+    if (categories?.category && singleProduct?.category) {
+      const category = categories.category.find(
+        (obj) => obj._id === singleProduct.category
+      );
+      setCategoryName(category ? category.name : "Unknown");
+    }
   }, [singleProduct, categories]);
 
   function handleAddToWishlist() {
     isUserLoggedIn
       ? addToWishlist(singleProduct.slug)
+      : (window.location.href =
+          "/user/login?referer=/product/" + singleProduct.slug);
+  }
+
+  function handleAddToCart() {
+    isUserLoggedIn
+      ? addToCart(singleProduct)
       : (window.location.href =
           "/user/login?referer=/product/" + singleProduct.slug);
   }
@@ -63,7 +72,7 @@ function SingleProduct() {
             </p>
             <p>{singleProduct.description}</p>
 
-            <button>Add To Cart</button>
+            <button onClick={handleAddToCart}>Add To Cart</button>
             <Link
               className="rounded px-2 py-1 bg-blue-400 text-white"
               onClick={handleAddToWishlist}

@@ -26,6 +26,9 @@ function Header() {
     setWishlist(data);
   }
 
+  const wishlistCount = wishlist?.filter((item) => item?.product)?.length || 0;
+  console.log("wishlistcount", wishlistCount);
+
   return (
     <header className="flex justify-between bg-amber-200 px-12 py-2">
       <NavLink to="/">
@@ -96,7 +99,7 @@ function Header() {
             <p className="flex items-center relative">
               Wishlist
               <span className="absolute right-[-14px] top-[-9px] rounded-full bg-red-600 text-white px-[5px] mt-1 text-xs">
-                {wishlist.length}
+                {wishlistCount}
               </span>
               <span className="px-1">
                 <FaHeart />

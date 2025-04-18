@@ -92,7 +92,14 @@ function EcomProvider({ children }) {
       const response = await instance.get("/user/getWishlist", {
         withCredentials: true,
       });
-      return response.data.wishlist;
+      const wishlistData = response.data.wishlist;
+      const populatedWishlist = await Promise.all(
+        wishlistData.map(async (productId) => {
+          const productResponse = await instance.get(`/product/get/${productId}`);
+          return { product: productResponse.data.products[0] };
+        })
+      );
+      setWishlist(populatedWishlist);
     } catch (error) {
       console.log(error);
     }
@@ -133,52 +140,37 @@ function EcomProvider({ children }) {
     setWishlist(wishlist.filter((item) => item.product._id !== id));
   }
 
-  // addToCart function
+  // Add to Cart function
   function addToCart(product) {
-    if (existInCart(product._id)) {
-      // If the product is already in the cart, updates it quantity.
+    const existingCartItem = cart.find((item) => item.product._id === product._id);
+    if (existingCartItem) {
       setCart(
-        cart.map((cartItem) =>
-          cartItem.product._id === product._id
-            ? { ...cartItem, quantity: Number(cartItem.quantity) }
-            : cartItem
+        cart.map((item) =>
+          item.product._id === product._id
+            ? { ...item, quantity: item.quantity + 1 }
+            : item
         )
       );
-      // If the product is not in the cart, add it with the quantity 1.
     } else {
-      const obj = { product, quantity: 1 };
-      setCart([...cart, obj]);
+      setCart([...cart, { product, quantity: 1 }]);
     }
   }
 
-  // function to check whether product is there in the cart or not.
-  function existInCart(id) {
-    // find () searches the array to find the first product that matches with the given id.
-    const productAlreadyExists = cart.find(
-      (cartItem) => cartItem.product._id === id
-    );
-    return productAlreadyExists ? true : false;
+  // Remove from Cart function
+  function removeFromCart(productId) {
+    setCart(cart.filter((item) => item.product._id !== productId));
   }
 
-  // function to remove item from cart.
-  function removeFromCart(id) {
-    // filter function returns all those product whose id is not equal to given id in form of an array.
-    setCart(cart.filter((item) => item.product._id !== id));
-  }
-
-  // function to update the quantity of the product.
-  function updateQuantity(productId, sign) {
-    if (!existInCart(productId)) {
-      alert("Incorrect Id");
-    }
+  // Update Quantity function
+  function updateQuantity(productId, action) {
     setCart(
-      cart.map((cartItem) =>
-        cartItem.product._id === productId
+      cart.map((item) =>
+        item.product._id === productId
           ? {
-              ...cartItem,
-              quantity: cartItem.quantity + (sign === "+" ? 1 : -1),
+              ...item,
+              quantity: action === "increment" ? item.quantity + 1 : Math.max(item.quantity - 1, 1),
             }
-          : cartItem
+          : item
       )
     );
   }
@@ -195,7 +187,7 @@ function EcomProvider({ children }) {
         fetchProduct,
         addToCart,
         removeFromCart,
-        existInCart,
+        
         updateQuantity,
         addToWishlist,
         existInWishlist,

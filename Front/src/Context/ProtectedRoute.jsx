@@ -19,7 +19,6 @@ function ProtectedRoute({ children }) {
         : "admin";
       await instance.get(route + "/check", { withCredentials: true });
       setAllowed(true);
-      
     } catch (error) {
       console.log(error);
       setLoading(false);
