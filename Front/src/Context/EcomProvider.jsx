@@ -94,18 +94,15 @@ function EcomProvider({ children }) {
       });
       const wishlistData = response.data.wishlist;
 
-      console.log(wishlistData);
-
       const populatedWishlist = await Promise.all(
         wishlistData.map(async (productId) => {
           const productResponse = await instance.get(
             `/product/get/${productId}`
           );
-          console.log(productResponse);
           return { product: productResponse.data.products[0] };
         })
       );
-      console.log(populatedWishlist);
+
       setWishlist(populatedWishlist);
       // return populatedWishlist;
     } catch (error) {

@@ -20,7 +20,7 @@ function Cart() {
   }, [totalPrice, cart]);
 
   return (
-    <div className="cart flex gap-8">
+    <div className="cart flex gap-8 p-6 min-h-[100svh]">
       {cart.length === 0 ? (
         <div className="emptyCart">
           <h2>Nothing is added to the cart</h2>
